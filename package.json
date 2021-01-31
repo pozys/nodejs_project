@@ -18,8 +18,13 @@
   "homepage": "https://github.com/pozys/nodejs_project#readme",
   "dependencies": {
     "ansi": "^0.3.1",
+    "axios": "^0.21.1",
     "chalk": "^4.1.0",
+    "cheerio": "^1.0.0-rc.5",
     "dayjs": "^1.10.4",
-    "minimist": "^1.2.5"
+    "express": "^4.17.1",
+    "minimist": "^1.2.5",
+    "puppeteer": "^5.5.0",
+    "request": "^2.88.2"
   }
 }

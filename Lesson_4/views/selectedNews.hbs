@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ваши новости</title>
+</head>
+
+<body>
+    {{#if error}}
+    <h3>{{error}}</h3>
+    {{else}}
+    <h3>Новости в категории "{{news_type}}":</h3>
+    <div>
+        <ul>{{#each news}}
+            <li>{{this}}</li>
+            {{else}}
+            <p>Нет новостей</p>
+            {{/each}}
+        </ul>
+    </div>
+    {{/if}}
+    <a href="/news">Назад</a>
+</body>
+
+</html>

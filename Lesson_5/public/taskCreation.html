@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Добавление задачи</title>
+  </head>
+  <body>
+    <form action="/store" method="post">
+      <p>
+        <input
+          type="text"
+          name="name"
+          placeholder="Краткое описание задачи"
+          required
+        />
+      </p>
+
+      <textarea
+        name="description"
+        cols="50"
+        rows="20"
+        placeholder="Описание задачи"
+        required
+      ></textarea>
+      <p>
+        <label for="priority">Приоритет</label>
+        <select name="priority" id="priority">
+          <option value="Высокий">Высокий</option>
+          <option value="Средний" selected>Средний</option>
+          <option value="Низкий">Низкий</option>
+        </select>
+      </p>
+
+      <p><button type="submit">Создать задачу</button></p>
+    </form>
+  </body>
+</html>

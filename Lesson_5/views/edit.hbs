@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача</title>
+</head>
+
+<body>
+    {{#if error}}
+    <p>При получении информации о задаче произошла ошибка: {{error}}</p>
+    {{else}}
+    <form action="/update" method="post">
+        <input type="hidden" name="id" value="{{id}}">
+
+        <p>
+            <input type="text" name="name" value="{{name}}" placeholder="Краткое описание задачи" required />
+        </p>
+        <p>
+            <textarea name="description" cols="50" rows="20" placeholder="Описание задачи"
+                required>{{description}}</textarea>
+        </p>
+        <p>
+            <label for="priority">Приоритет</label>
+            <select name="priority" id="priority">
+                <option value="Высокий" {{#if (selectedPriority "Высокий" priority)}} selected {{/if}}>Высокий
+                </option>
+                <option value="Средний" {{#if (selectedPriority "Средний" priority)}} selected {{/if}}>Средний
+                </option>
+                <option value="Низкий" {{#if (selectedPriority "Низкий" priority)}} selected {{/if}}>Низкий</option>
+            </select>
+        </p>
+        <p><button type="submit">Сохранить задачу</button></p>
+    </form>
+    {{/if}}
+</body>
+
+</html>

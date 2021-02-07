@@ -27,6 +27,7 @@
     "express": "^4.17.1",
     "handlebars": "^4.7.6",
     "minimist": "^1.2.5",
+    "mysql2": "^2.2.5",
     "path": "^0.12.7",
     "puppeteer": "^5.5.0",
     "request": "^2.88.2"

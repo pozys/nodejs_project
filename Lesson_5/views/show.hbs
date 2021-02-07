@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача</title>
+</head>
+
+<body>
+    {{#if error}}
+    <p>При получении информации о задаче произошла ошибка: {{error}}</p>
+    {{else}}
+    <h3>{{name}}</h3>
+    <div>
+        <p>
+            <textareacols="50" rows="20" disabled>{{description}}</textarea>
+        </p>
+        <p>
+            <label for="priority">Приоритет</label>
+            <input type="text" id="priority" value={{priority}} disabled>
+        </p>
+    </div>
+    {{/if}}
+    <div>
+        <input type="button" value="Изменить задачу" onclick="location.href='/edit/{{id}}'">
+        <form action="/destroy/{{id}}" method="post">
+            <button type="submit">Удалить задачу</button>
+        </form>
+    </div>
+</body>
+
+</html>

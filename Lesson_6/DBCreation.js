@@ -17,6 +17,16 @@ const connectionWithoutDB = connection.connectionWithoutDB().promise();
       );`
     );
     console.log(result);
+
+    [result, fields] = await connectionWithoutDB.execute(
+      `CREATE TABLE IF NOT EXISTS HW5.users(
+        id int unsigned primary key auto_increment,
+        login varchar(150) not null,
+        password varchar(250) not null,
+        email varchar(250)
+      );`
+    );
+    console.log(result);
   } catch (err) {
     console.error(err);
   } finally {

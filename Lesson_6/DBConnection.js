@@ -31,7 +31,7 @@ const poolConnection = () => {
 const connection = {
   simpleConnection: simpleConnection,
   connectionWithoutDB: connectionWithoutDB,
-  poolConnection: poolConnection,
+  poolConnection: poolConnection().promise(),
 };
 
 module.exports = connection;

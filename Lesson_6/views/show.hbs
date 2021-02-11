@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача</title>
+</head>
+
+<body>
+    <menu>
+        <ul style="margin: 0; padding: 4px;">
+            <li style="display: inline; margin-right: 8px;"><a href="/tasks/main">Список задач</a></li>
+            <li style="display: inline; margin-right: 8px;"><a href="/auth/login">Войти</a></li>
+            <li style="display: inline; margin-right: 8px;"><a href="/auth/logout">Выйти</a></li>
+            <li style="display: inline; margin-right: 8px;"><a href="/auth/signin">Зарегистрироваться</a></li>
+        </ul>
+    </menu>
+    {{#if error}}
+    <p>При получении информации о задаче произошла ошибка: {{error}}</p>
+    {{else}}
+    <h3>{{name}}</h3>
+    <div>
+        <p>
+            <textareacols="50" rows="20" disabled>{{description}}</textarea>
+        </p>
+        <p>
+            <label for="priority">Приоритет</label>
+            <input type="text" id="priority" value={{priority}} disabled>
+        </p>
+    </div>
+    {{/if}}
+    <div>
+        <input type="button" value="Изменить задачу" onclick="location.href='/tasks/edit/{{id}}'">
+        <form action="/tasks/destroy/{{id}}" method="post">
+            <button type="submit">Удалить задачу</button>
+        </form>
+    </div>
+</body>
+
+</html>

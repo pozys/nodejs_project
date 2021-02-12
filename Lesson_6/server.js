@@ -44,19 +44,34 @@ const sessionMiddleware = session({
 app.use(sessionMiddleware);
 
 const passport = require("passport");
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
-passport.use(new GoogleStrategy({
-    clientID: config.googleClientID,
-    clientSecret: config.googleClientSecret,
-    callbackURL: "http://localhost:3000/auth/googleCallback"
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
-  }
-));
+const models = require("./models");
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: config.googleClientID,
+      clientSecret: config.googleClientSecret,
+      callbackURL: "http://localhost:3000/auth/googleCallback",
+    },
+    async function (accessToken, refreshToken, profile, cb) {
+      let user = await models.User.findOrCreateGoogle(profile);
+      return cb(null, user);
+    }
+  )
+);
+
+passport.serializeUser(function (user, cb) {
+  cb(null, user.login);
+});
+
+passport.deserializeUser(function (login, cb) {
+  cb(null, login);
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 const router = require("./routers");
 

@@ -70,6 +70,20 @@ class User {
   checkPassword(password) {
     return bcryptjs.compareSync(password, this.password);
   }
+
+  static async findOrCreateGoogle(profile) {
+    let user = await this.findByLogin(profile.id);
+
+    if (!user) {
+      let user = new User();
+      let data = { login: profile.id, password: profile.id, email: "" };
+
+      user.fill(data);
+      user.save();
+    }
+
+    return user;
+  }
 }
 
 module.exports = User;

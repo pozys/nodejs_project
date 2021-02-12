@@ -62,22 +62,23 @@ const signin = async (req, res, next) => {
 };
 
 const logout = async (req, res, next) => {
+  req.logout();
   req.session.destroy(() => {
     res.redirect("/");
   });
 };
 
-const loginByGoogle = async (req, res, next) => {
-  console.log('loginByGoogle');
-  passport.authenticate("google", { scope: ["https://www.googleapis.com/auth/drive.file"] });
-};
+const loginByGoogle = passport.authenticate("google", {
+  scope: ["https://www.googleapis.com/auth/userinfo.profile"],
+});
 
-const googleCallback = async (req, res, next) => {
-  console.log('googleCallback');
-  passport.authenticate("google", { failureRedirect: "/login" }),
-    function (req, res) {
-      res.redirect("/");
-    };
+const googleCallback = passport.authenticate("google", {
+  failureRedirect: "/login",
+});
+
+const googleLoggedIn = async (req, res, next) => {
+  req.session.login = req.user.login;
+  res.redirect("/tasks/main");
 };
 
 module.exports = {
@@ -88,4 +89,5 @@ module.exports = {
   logout,
   loginByGoogle,
   googleCallback,
+  googleLoggedIn,
 };

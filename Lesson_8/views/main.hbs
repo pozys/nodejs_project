@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задачи</title>
+</head>
+
+<body>
+    <menu>
+        <ul style="margin: 0; padding: 4px;">
+            <li style="display: inline; margin-right: 8px;"><a href="/tasks/main">Список задач</a></li>
+            <li style="display: inline; margin-right: 8px;"><a href="/auth/login">Войти</a></li>
+            <li style="display: inline; margin-right: 8px;"><a href="/auth/logout">Выйти</a></li>
+            <li style="display: inline; margin-right: 8px;"><a href="/auth/signin">Зарегистрироваться</a></li>
+        </ul>
+    </menu>
+    {{#if error}}
+    <p>Произошла ошибка: {{error}}</p>
+    {{else}}
+    <h2>Ваш список задач</h2>
+    <div>
+        {{#if tasks}}
+        {{#each tasks}}
+        <p>
+            <a href="/tasks/show/{{this.id}}">{{this.name}}</a>
+        </p>
+        {{/each}}
+        {{else}}
+        <p>Список задач пуст</p>
+        {{/if}}
+
+    </div>
+    <input type="button" value="Добавить задачу" onclick="location.href='/tasks/create'">
+    {{/if}}
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        let socket = io();
+        socket.on('new task', (task) => {
+            alert(`Вам назначена новая задача
+            Тема: ${task.name}
+            Описание: ${task.description}
+            Приоритет: ${task.priority}`);
+        });
+    </script>
+</body>
+
+</html>
